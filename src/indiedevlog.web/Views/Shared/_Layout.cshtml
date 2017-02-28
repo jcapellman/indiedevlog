@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - indiedevlog.web</title>
+    <title>indieDEVlog - @ViewData["Title"]</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -25,27 +25,34 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">indiedevlog.web</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">indiedevlog</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2017 - indiedevlog.web</p>
-        </footer>
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-10">
+            @RenderBody()
+        </div>
+        <div class="col-md-2">
+            <div class="sidebarContainer">
+                <input type="text" placeholder="search term here" />
+            </div>
+        </div>
     </div>
+
+    <footer>
+        <p>
+            &copy; 2017 - <a href="http://www.jarredcapellman.com/" target="_blank">Jarred Capellman</a>
+        </p>
+    </footer>
+</div>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

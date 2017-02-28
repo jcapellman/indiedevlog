@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #0e0e0e;
 }
 
 /* Wrapping element */
@@ -34,4 +35,58 @@ textarea {
     .carousel-caption {
         display: none;
     }
+}
+
+h1 {
+    color: gold;
+}
+
+.postContainer {
+}
+
+.postContainer h3 {
+    color: white;
+    background-color: #2e2e2e;
+    text-transform: uppercase;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 0;
+}
+
+.postContainer .content {
+    background-color: #1e1e1e;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.postContainer .content p {
+    color: white;
+    padding: 10px;
+}
+
+.postContainer .content .footer {
+    height: 20px;
+    background-color: black;
+}
+
+.postContainer .content .footer .date {
+    color: white;
+    text-align: right;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    float: right;
+}
+
+.postContainer .content .footer .user {
+    color: white;
+    text-align: right;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    float: left;
+}
+
+.sidebarContainer {
+    margin-top: 20px;
+    background-color: #1e1e1e;
+    height: 100%;
 }
