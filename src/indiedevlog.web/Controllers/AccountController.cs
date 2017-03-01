@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-
+using System.Threading.Tasks;
 using indiedevlog.web.EFModel;
 using indiedevlog.web.EFModel.Objects;
 using indiedevlog.web.Models;
@@ -33,7 +35,7 @@ namespace indiedevlog.web.Controllers
             return View(model);
         }
 
-        public ActionResult AttemptLogin(LoginModel model)
+        public async Task<ActionResult> AttemptLogin(LoginModel model)
         {
             using (var eFactory = new EntityFactory(_globalSettings.DatabaseConnection))
             {
@@ -41,6 +43,16 @@ namespace indiedevlog.web.Controllers
 
                 if (eFactory.Users.Any(a => a.Username == model.Username && a.Password == passwordHash && a.Active))
                 {
+                    var claims = new List<Claim>
+                    {
+                        new Claim("username", model.Username)
+                    };
+
+                    var id = new ClaimsIdentity(claims, "password");
+                    var principal = new ClaimsPrincipal(id);
+
+                    await HttpContext.Authentication.SignInAsync("CookieMiddleware", principal);
+
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -48,6 +60,13 @@ namespace indiedevlog.web.Controllers
 
                 return View("Index", model);
             }
+        }
+
+        public async Task<ActionResult> Logout()
+        {
+            await HttpContext.Authentication.SignOutAsync("CookieMiddleware");
+
+            return View("Index", "Home");
         }
 
         private string hashString(string input)
