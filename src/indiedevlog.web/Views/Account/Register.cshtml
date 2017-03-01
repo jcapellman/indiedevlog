@@ -1,0 +1,19 @@
+﻿@model indiedevlog.web.Models.RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>register</h1>
+
+<div class="registerContainer">
+    Register an account below to begin posting .plan updates.<br/><br/>
+
+    <form asp-action="AttemptRegister" method="post">
+        <input asp-for="Username" class="form-control" placeholder="username" /><br/>
+        <input asp-for="Password" type="password" class="form-control" placeholder="password" /><br/>
+        <input asp-for="DisplayName" class="form-control" placeholder="display name" /><br/>
+
+        <input type="submit" value="register" class="btn btn-default" />
+    </form>
+</div>

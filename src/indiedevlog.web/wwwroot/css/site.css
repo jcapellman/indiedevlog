@@ -1,7 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-color: #00008b;
+    background-color: #00000c;
 }
 
 /* Wrapping element */
@@ -40,10 +40,16 @@ textarea {
 h1 {
     color: white;
     border: 1px solid black;
-    background-color: #2e2e2e;
+    background-color: #0e0e0e;
     border-radius: 10px;
     padding: 10px;
     text-transform: uppercase;
+}
+
+.registerContainer {
+    background-color: #1e1e1e;
+    color: white;
+    padding: 10px;
 }
 
 .postContainer {
@@ -51,7 +57,7 @@ h1 {
 
 .postContainer h3 {
     color: gold;
-    background-color: #2e2e2e;
+    background-color: #0e0e0e;
     border: 1px solid black;
     text-transform: uppercase;
     padding: 10px;
@@ -72,7 +78,7 @@ h1 {
 
 .postContainer .content .footer {
     height: 20px;
-    background-color: black;
+    background-color: #0e0e0e;
 }
 
 .postContainer .content .footer .date {
@@ -97,6 +103,18 @@ h1 {
     height: 100%;
 }
 
+footer {
+    margin-top: 10px;
+}
+
 footer p {
     text-align: center;
+}
+
+.navbar-inverse {
+    background-color: #0e0e0e;
+}
+
+.navbar-brand {
+    font-weight: bolder;
 }

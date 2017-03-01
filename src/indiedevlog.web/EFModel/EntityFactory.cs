@@ -1,5 +1,9 @@
-﻿using indiedevlog.web.EFModel.Objects;
+﻿using System;
+using System.Linq;
+
+using indiedevlog.web.EFModel.Objects;
 using indiedevlog.web.EFModel.Objects.SPs;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace indiedevlog.web.EFModel
@@ -22,6 +26,31 @@ namespace indiedevlog.web.EFModel
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString);
+        }
+
+        public override int SaveChanges()
+        {
+            var changeSet = ChangeTracker.Entries();
+
+            if (changeSet == null)
+            {
+                return base.SaveChanges();
+            }
+
+            foreach (var entry in changeSet.Where(c => c.State != EntityState.Unchanged))
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Member("Created").CurrentValue = DateTime.Now;
+                        entry.Member("Active").CurrentValue = true;
+                        break;
+                }
+                    
+                entry.Member("Modified").CurrentValue = DateTime.Now;
+            }
+
+            return base.SaveChanges();
         }
     }
 }
