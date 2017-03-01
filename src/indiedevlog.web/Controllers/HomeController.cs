@@ -1,8 +1,11 @@
 ﻿using System.Linq;
+
 using indiedevlog.web.EFModel;
+using indiedevlog.web.EFModel.Objects.SPs;
 using indiedevlog.web.Settings;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace indiedevlog.web.Controllers
@@ -15,7 +18,7 @@ namespace indiedevlog.web.Controllers
         {
             using (var dbFactory = new EntityFactory(_globalSettings.DatabaseConnection))
             {
-                return View(dbFactory.PlanUpdates.Where(a => a.Active).ToList());
+                return View(dbFactory.Set<getLatestPlanUpdatesSP>().FromSql($"dbo.getLatestPlanUpdatesSP @RowCount = {_globalSettings.NumPostsToList}").ToList());
             }
         }
     }

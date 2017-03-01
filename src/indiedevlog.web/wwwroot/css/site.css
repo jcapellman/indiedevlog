@@ -90,3 +90,7 @@ h1 {
     background-color: #1e1e1e;
     height: 100%;
 }
+
+footer p {
+    text-align: center;
+}

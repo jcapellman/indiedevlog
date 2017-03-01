@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace indiedevlog.web.EFModel.Objects
+﻿namespace indiedevlog.web.EFModel.Objects
 {
     public class Users : BaseTable
     {
@@ -13,6 +8,6 @@ namespace indiedevlog.web.EFModel.Objects
 
         public string DisplayName { get; set; }
 
-        public bool IsConfirmed { get; set; }
+        public bool IsConfirmed { get; set; }        
     }
 }

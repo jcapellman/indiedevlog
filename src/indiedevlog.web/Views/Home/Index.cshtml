@@ -1,4 +1,4 @@
-﻿@model List<indiedevlog.web.EFModel.Objects.PlanUpdates>
+﻿@model List<indiedevlog.web.EFModel.Objects.SPs.getLatestPlanUpdatesSP>
 
 @{
     ViewData["Title"] = "Home";
@@ -14,8 +14,8 @@
         <div class="content">
             <p>@post.Body</p>
             <div class="footer">
-                <span class="user">@post.UserID</span>
-                <span class="date">@post.Modified.ToString("MM-dd-yyyy")</span>
+                <span class="user">@post.DisplayName</span>
+                <span class="date">@post.Created.ToString("MM-dd-yyyy")</span>
             </div>
         </div>
     </div>
