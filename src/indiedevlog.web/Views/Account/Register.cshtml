@@ -16,4 +16,12 @@
 
         <input type="submit" value="register" class="btn btn-default" />
     </form>
+    
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="errorContainer">
+            @Model.ErrorMessage
+        </div>
+    }
 </div>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -20,14 +21,35 @@ namespace indiedevlog.web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var model = new LoginModel();
+
+            return View(model);
         }
 
         public ActionResult Register()
         {
-            return View();
+            var model = new RegisterModel();
+
+            return View(model);
         }
-        
+
+        public ActionResult AttemptLogin(LoginModel model)
+        {
+            using (var eFactory = new EntityFactory(_globalSettings.DatabaseConnection))
+            {
+                var passwordHash = hashString(model.Password);
+
+                if (eFactory.Users.Any(a => a.Username == model.Username && a.Password == passwordHash && a.Active))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                model.ErrorMessage = "Incorrect username or password";
+
+                return View("Index", model);
+            }
+        }
+
         private string hashString(string input)
         {
             using (var algorithm = SHA512.Create())
@@ -45,6 +67,13 @@ namespace indiedevlog.web.Controllers
         {
             using (var eFactory = new EntityFactory(_globalSettings.DatabaseConnection))
             {
+                if (eFactory.Users.Any(a => a.Active && (a.Username == model.Username || a.DisplayName == model.DisplayName)))
+                {
+                    model.ErrorMessage = "Username or Display Name is already taken";
+
+                    return View("Register", model);
+                }
+
                 var user = new Users
                 {
                     IsConfirmed = true,
