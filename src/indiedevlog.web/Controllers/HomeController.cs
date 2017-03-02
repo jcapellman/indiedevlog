@@ -14,6 +14,7 @@ namespace indiedevlog.web.Controllers
     {
         public HomeController(IOptions<GlobalSettings> globalSettings) : base(globalSettings.Value) { }
         
+        [ResponseCache(NoStore = false, Duration = 3600)]
         public IActionResult Index()
         {
             using (var dbFactory = new EntityFactory(_globalSettings.DatabaseConnection))
