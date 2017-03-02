@@ -35,6 +35,11 @@
                         <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
                     }
                 </ul>
+                
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span class="welcomeBack"> Welcome back <strong>@User.Claims.ToList().FirstOrDefault(a => a.Type == "username").Value</strong>!</span>
+                }
             </div>
         </div>
     </nav>
