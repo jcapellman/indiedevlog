@@ -1,0 +1,18 @@
+﻿@model indiedevlog.web.Models.CreatePlanUpdateModel
+
+@{
+    ViewData["Title"] = "Create new plan update";
+}
+
+<h1>Create Plan Update</h1>
+
+<div class="registerContainer">
+    Enter your plan update below<br /><br />
+
+    <form asp-action="CreatePlanUpdate" method="post">
+        <input asp-for="Subject" class="form-control" required placeholder="subject" /><br />
+        <textarea asp-for="Body" type="text" class="form-control" cols="30" maxlength="5000" rows="15" required placeholder="body"></textarea><br/>
+
+        <input type="submit" value="submit" class="btn btn-default" />
+    </form>
+</div>

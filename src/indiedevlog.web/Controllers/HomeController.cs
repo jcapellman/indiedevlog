@@ -13,7 +13,7 @@ namespace indiedevlog.web.Controllers
     public class HomeController : BaseController
     {
         public HomeController(IOptions<GlobalSettings> globalSettings) : base(globalSettings.Value) { }
-
+        
         public IActionResult Index()
         {
             using (var dbFactory = new EntityFactory(_globalSettings.DatabaseConnection))

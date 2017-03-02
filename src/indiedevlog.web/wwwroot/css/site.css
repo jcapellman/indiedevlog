@@ -15,7 +15,7 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 480px;
 }
 
 /* Carousel */
@@ -122,4 +122,14 @@ footer p {
 
 .navbar-brand {
     font-weight: bolder;
+}
+
+textarea, input[type=text] {
+    background-color: #0e0e0e !important;
+}
+
+input[type=submit] {
+    background-color: #1e1e1e;
+    color: #FFF;
+    width: 120px;
 }

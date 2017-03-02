@@ -41,11 +41,15 @@ namespace indiedevlog.web.Controllers
             {
                 var passwordHash = hashString(model.Password);
 
-                if (eFactory.Users.Any(a => a.Username == model.Username && a.Password == passwordHash && a.Active))
+                var userMatch =
+                    eFactory.Users.FirstOrDefault(a => a.Username == model.Username && a.Password == passwordHash && a.Active);
+
+                if (userMatch != null)
                 {
                     var claims = new List<Claim>
                     {
-                        new Claim("username", model.Username)
+                        new Claim("username", model.Username),
+                        new Claim("userid", userMatch.ID.ToString())
                     };
 
                     var id = new ClaimsIdentity(claims, "password");
@@ -66,7 +70,7 @@ namespace indiedevlog.web.Controllers
         {
             await HttpContext.Authentication.SignOutAsync("CookieMiddleware");
 
-            return View("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         private string hashString(string input)

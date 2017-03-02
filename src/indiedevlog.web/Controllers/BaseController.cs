@@ -16,5 +16,17 @@ namespace indiedevlog.web.Controllers
         {
             _globalSettings = globalSettings;
         }
+
+        public int UserID
+        {
+            get
+            {
+                var claims = User.Claims.ToList();
+
+                var userClaim = claims.FirstOrDefault(a => a.Type == "userid");
+
+                return Convert.ToInt32(userClaim.Value);
+            }
+        }
     }
 }
