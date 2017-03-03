@@ -1,4 +1,4 @@
-﻿@model List<indiedevlog.web.EFModel.Objects.SPs.getUserProjectsSP>
+﻿@model indiedevlog.web.Models.ProjectModel
 
 @{
     ViewData["Title"] = "Projects";
@@ -10,8 +10,16 @@
     Enter your plan update below<br /><br />
 
     <form asp-action="CreateProject" method="post">
-        <input asp-for="Subject" class="form-control" required placeholder="subject" /><br />
+        <input asp-for="Name" class="form-control" required placeholder="subject" /><br />
         
         <input type="submit" value="submit" class="btn btn-default" />
     </form>
 </div>
+
+
+@foreach (var project in @Model.ProjecListing)
+{
+    <div>
+        @project.Name
+    </div>
+}

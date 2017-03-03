@@ -2,6 +2,8 @@
 
 using indiedevlog.web.EFModel;
 using indiedevlog.web.EFModel.Objects.SPs;
+using indiedevlog.web.EFModel.Objects.Tables;
+using indiedevlog.web.Models;
 using indiedevlog.web.Settings;
 
 using Microsoft.AspNetCore.Mvc;
@@ -16,9 +18,29 @@ namespace indiedevlog.web.Controllers
         {
         }
 
-        public ActionResult CreateProject(string name)
+        public ActionResult CreateProject(ProjectModel model)
         {
-            return RedirectToAction("Index", "Projects");
+            using (var dbFactory = new EntityFactory(_globalSettings.DatabaseConnection))
+            {
+                var project = new Projects
+                {
+                    Name = model.Name
+                };
+
+                dbFactory.Projects.Add(project);
+                dbFactory.SaveChanges();
+
+                var projectRelation = new Users2Projects
+                {
+                    UserID = UserID,
+                    ProjectID = project.ID
+                };
+
+                dbFactory.Users2Projects.Add(projectRelation);
+                dbFactory.SaveChanges();
+
+                return RedirectToAction("Index", "Projects");
+            }
         }
 
         public ActionResult Index()

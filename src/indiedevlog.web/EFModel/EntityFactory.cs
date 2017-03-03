@@ -3,6 +3,7 @@ using System.Linq;
 
 using indiedevlog.web.EFModel.Objects;
 using indiedevlog.web.EFModel.Objects.SPs;
+using indiedevlog.web.EFModel.Objects.Tables;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,10 @@ namespace indiedevlog.web.EFModel
         public DbSet<PlanUpdates> PlanUpdates { get; set; }
 
         public DbSet<Users> Users { get; set; }
+
+        public DbSet<Projects> Projects { get; set; }
+
+        public DbSet<Users2Projects> Users2Projects { get; set; }
 
         public DbSet<getLatestPlanUpdatesSP> getLatestPlanUpdatesSP { get; set; }
 
