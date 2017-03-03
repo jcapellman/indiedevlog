@@ -27,6 +27,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li><a asp-area="" asp-controller="PlanUpdates" asp-action="Index">Create Post</a></li>
+                        <li><a asp-area="" asp-controller="Projects" asp-action="Index">Projects</a></li>
                         <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
                     }
                     else

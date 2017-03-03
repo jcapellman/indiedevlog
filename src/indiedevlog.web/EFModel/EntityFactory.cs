@@ -16,6 +16,8 @@ namespace indiedevlog.web.EFModel
 
         public DbSet<getLatestPlanUpdatesSP> getLatestPlanUpdatesSP { get; set; }
 
+        public DbSet<getUserProjectsSP> getUserProjectsSP { get; set; }
+
         private readonly string _connectionString;
 
         public EntityFactory(string connectionString)
