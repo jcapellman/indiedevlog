@@ -3,6 +3,7 @@
 using indiedevlog.web.EFModel;
 using indiedevlog.web.EFModel.Objects.SPs;
 using indiedevlog.web.EFModel.Objects.Tables;
+using indiedevlog.web.Managers;
 using indiedevlog.web.Models;
 using indiedevlog.web.Settings;
 
@@ -45,17 +46,13 @@ namespace indiedevlog.web.Controllers
 
         public ActionResult Index()
         {
-            using (var dbFactory = new EntityFactory(_globalSettings.DatabaseConnection))
+            var model = new ProjectModel
             {
-                var model = new ProjectModel
-                {
-                    Name = string.Empty,
-                    ProjecListing =
-                        dbFactory.Set<getUserProjectsSP>().FromSql($"dbo.getUserProjectsSP @UserID = {UserID}").ToList()
-                };
+                Name = string.Empty,
+                ProjecListing = new ProjectManager(_globalSettings).GetUserProjects(UserID)
+            };
 
-                return View(model);
-            }
+            return View(model);
         }
     }
 }
