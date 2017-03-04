@@ -47,7 +47,14 @@ namespace indiedevlog.web.Controllers
         {
             using (var dbFactory = new EntityFactory(_globalSettings.DatabaseConnection))
             {
-                return View(dbFactory.Set<getUserProjectsSP>().FromSql($"dbo.getUserProjectsSP @UserID = {UserID}").ToList());
+                var model = new ProjectModel
+                {
+                    Name = string.Empty,
+                    ProjecListing =
+                        dbFactory.Set<getUserProjectsSP>().FromSql($"dbo.getUserProjectsSP @UserID = {UserID}").ToList()
+                };
+
+                return View(model);
             }
         }
     }
