@@ -15,7 +15,7 @@
         </div>
 
         <div class="content">
-            <p>@Html.Raw(@post.Body)</p>
+            <p>@Html.Raw(@post.Body.Replace(System.Environment.NewLine, "<br/>"))</p>
             <div class="footer">
                 <span class="user">@post.DisplayName</span>
                 <span class="date">@post.Created.ToString("MM-dd-yyyy")</span>
