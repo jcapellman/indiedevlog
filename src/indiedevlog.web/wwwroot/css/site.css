@@ -60,13 +60,27 @@ h1 {
 .postContainer {
 }
 
-.postContainer h3 {
-    color: gold;
+.postContainer .header {
     background-color: #0e0e0e;
     border: 1px solid black;
+    border-radius: 10px;
+    height: 40px;
+}
+
+.postContainer .header h3 {
+    color: gold;
     text-transform: uppercase;
     padding: 10px;
-    border-radius: 10px;
+    margin: 0;
+    float: left;
+}
+
+.postContainer .header h4 {
+    float: right;
+    color: #FFF;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px;
     margin: 0;
 }
 
@@ -124,7 +138,7 @@ footer p {
     font-weight: bolder;
 }
 
-textarea, input[type=text] {
+textarea, input[type=text], select {
     background-color: #0e0e0e !important;
 }
 

@@ -9,14 +9,19 @@
 @foreach (var post in @Model)
 {
     <div class="postContainer">
-        <h3>@post.Subject</h3>
-        
+        <div class="header">
+            <h3>@post.Subject</h3>
+            <h4>@post.ProjectName</h4>
+        </div>
+
         <div class="content">
-            <p>@post.Body</p>
+            <p>@Html.Raw(@post.Body)</p>
             <div class="footer">
                 <span class="user">@post.DisplayName</span>
                 <span class="date">@post.Created.ToString("MM-dd-yyyy")</span>
             </div>
         </div>
     </div>
+
+    <br/>
 }

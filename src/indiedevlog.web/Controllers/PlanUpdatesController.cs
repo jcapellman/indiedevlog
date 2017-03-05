@@ -1,5 +1,6 @@
 ﻿using indiedevlog.web.EFModel;
 using indiedevlog.web.EFModel.Objects;
+using indiedevlog.web.Managers;
 using indiedevlog.web.Models;
 using indiedevlog.web.Settings;
 
@@ -18,7 +19,12 @@ namespace indiedevlog.web.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            var model = new CreatePlanUpdateModel
+            {
+                Projects = new ProjectManager(_globalSettings).GetUserProjects(UserID)
+            };
+
+            return View(model);
         }
 
         [Authorize]
