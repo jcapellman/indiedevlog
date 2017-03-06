@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace indiedevlog.web.EFModel.Objects
+﻿namespace indiedevlog.web.EFModel.Objects.Tables
 {
     public class PlanUpdates : BaseTable
     {
@@ -12,5 +7,7 @@ namespace indiedevlog.web.EFModel.Objects
         public string Subject { get; set; }
 
         public string Body { get; set; }
+
+        public int ProjectID { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using indiedevlog.web.EFModel;
 using indiedevlog.web.EFModel.Objects;
+using indiedevlog.web.EFModel.Objects.Tables;
 using indiedevlog.web.Models;
 using indiedevlog.web.Settings;
 

@@ -1,4 +1,4 @@
-﻿namespace indiedevlog.web.EFModel.Objects
+﻿namespace indiedevlog.web.EFModel.Objects.Tables
 {
     public class Users : BaseTable
     {

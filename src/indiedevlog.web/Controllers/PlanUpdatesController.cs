@@ -1,6 +1,4 @@
-﻿using indiedevlog.web.EFModel;
-using indiedevlog.web.EFModel.Objects;
-using indiedevlog.web.Managers;
+﻿using indiedevlog.web.Managers;
 using indiedevlog.web.Models;
 using indiedevlog.web.Settings;
 
@@ -30,20 +28,10 @@ namespace indiedevlog.web.Controllers
         [Authorize]
         public ActionResult CreatePlanUpdate(CreatePlanUpdateModel model)
         {
-            using (var eFactory = new EntityFactory(_globalSettings.DatabaseConnection))
-            {
-                var planUpdate = new PlanUpdates
-                {
-                    Body = model.Body,
-                    Subject = model.Subject,
-                    UserID = UserID
-                };
-
-                eFactory.PlanUpdates.Add(planUpdate);
-                eFactory.SaveChanges();
-
-                return RedirectToAction("Index", "Home");
-            }
+            var planResult = new PlanManager(_globalSettings).AddPlanUpdate(UserID, model.Subject, model.Body,
+                model.SelectedProjectID);
+            
+            return planResult ? RedirectToAction("Index", "Home") : RedirectToAction("Index", "Home");
         }
     }
 }
