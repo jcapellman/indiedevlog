@@ -1,4 +1,4 @@
-﻿@model List<indiedevlog.web.EFModel.Objects.SPs.getLatestPlanUpdatesSP>
+﻿@model List<indiedevlog.web.Objects.PlanUpdates.PlanUpdateResponseItem>
 
 @{
     ViewData["Title"] = "Home";
@@ -15,10 +15,10 @@
         </div>
 
         <div class="content">
-            <p>@Html.Raw(@post.Body.Replace(System.Environment.NewLine, "<br/>"))</p>
+            <p>@Html.Raw(post.Body)</p>
             <div class="footer">
-                <span class="user">@post.DisplayName</span>
-                <span class="date">@post.Created.ToString("MM-dd-yyyy")</span>
+                <span class="user">@post.AuthorName</span>
+                <span class="date">@post.PostDate.ToString("MM-dd-yyyy")</span>
             </div>
         </div>
     </div>

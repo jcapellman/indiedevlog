@@ -11,7 +11,7 @@ namespace indiedevlog.web.Controllers
     public class PlanUpdatesController : BaseController
     {
         public PlanUpdatesController(IOptions<GlobalSettings> globalSettings) : base(globalSettings.Value)
-        {
+        {   
         }
 
         [Authorize]
