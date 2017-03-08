@@ -3,6 +3,7 @@ using System.Linq;
 
 using indiedevlog.web.EFModel;
 using indiedevlog.web.EFModel.Objects.SPs;
+using indiedevlog.web.EFModel.Objects.Tables;
 using indiedevlog.web.Settings;
 
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,31 @@ namespace indiedevlog.web.Managers
     {
         public ProjectManager(GlobalSettings globalSettings) : base(globalSettings)
         {
+        }
+
+        public bool CreateProject(int userID, string projectName)
+        {
+            using (var dbFactory = new EntityFactory(GlobalSettings.DatabaseConnection))
+            {
+                var project = new Projects
+                {
+                    Name = projectName
+                };
+
+                dbFactory.Projects.Add(project);
+                dbFactory.SaveChanges();
+
+                var projectRelation = new Users2Projects
+                {
+                    UserID = userID,
+                    ProjectID = project.ID
+                };
+
+                dbFactory.Users2Projects.Add(projectRelation);
+                dbFactory.SaveChanges();
+
+                return true;
+            }
         }
 
         public List<getUserProjectsSP> GetUserProjects(int userID)

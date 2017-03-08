@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 using indiedevlog.web.Settings;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace indiedevlog.web.Controllers
@@ -16,7 +15,7 @@ namespace indiedevlog.web.Controllers
         {
             _globalSettings = globalSettings;
         }
-
+        
         public int UserID
         {
             get
