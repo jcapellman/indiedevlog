@@ -13,7 +13,7 @@ namespace indiedevlog.web.Controllers
         public PlanUpdatesController(IOptions<GlobalSettings> globalSettings) : base(globalSettings.Value)
         {   
         }
-
+        
         [Authorize]
         public ActionResult Index()
         {
@@ -30,8 +30,13 @@ namespace indiedevlog.web.Controllers
         {
             var planResult = new PlanManager(_globalSettings).AddPlanUpdate(UserID, model.Subject, model.Body,
                 model.SelectedProjectID);
-            
-            return planResult ? RedirectToAction("Index", "Home") : RedirectToAction("Index", "Home");
+
+            if (planResult)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View("Index", model);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace indiedevlog.web.Controllers
         {
         }
 
+        [HttpPost]
         public ActionResult CreateProject(ProjectModel model)
         {
             var result = new ProjectManager(_globalSettings).CreateProject(UserID, model.Name);

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace indiedevlog.web.Settings
+﻿namespace indiedevlog.web.Settings
 {
     public class GlobalSettings
     {
