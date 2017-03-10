@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 
+using indiedevlog.web.Common;
 using indiedevlog.web.EFModel;
 using indiedevlog.web.EFModel.Objects.Tables;
+using indiedevlog.web.Objects.Users;
 using indiedevlog.web.Settings;
 
 namespace indiedevlog.web.Managers
@@ -12,18 +14,28 @@ namespace indiedevlog.web.Managers
         {
         }
 
-        public Users AttemptLogin(string username, string password)
+        public ReturnSet<UserResponseItem> AttemptLogin(string username, string password)
         {
             using (var eFactory = new EntityFactory(GlobalSettings.DatabaseConnection))
             {
-                var passwordHash = hashString(password);
+                var passwordHash = HashString(password);
 
-                return
-                    eFactory.Users.FirstOrDefault(a => a.Username == username && a.Password == passwordHash && a.Active);
+                var user = eFactory.Users.FirstOrDefault(a => a.Username == username && a.Password == passwordHash && a.Active);
+
+                if (user == null)
+                {
+                    return new ReturnSet<UserResponseItem>(null, $"No match on {username} and {password}");
+                }
+
+                return new ReturnSet<UserResponseItem>(new UserResponseItem
+                {
+                    UserID = user.ID,
+                    DisplayName = user.DisplayName
+                });
             }
         }
 
-        public bool AttemptRegister(string username, string password, string displayName)
+        public ReturnSet<bool> AttemptRegister(string username, string password, string displayName)
         {
             using (var eFactory = new EntityFactory(GlobalSettings.DatabaseConnection))
             {
@@ -31,13 +43,13 @@ namespace indiedevlog.web.Managers
                     eFactory.Users.Any(
                         a => a.Active && (a.Username == username || a.DisplayName == displayName)))
                 {
-                    return false;
+                    return new ReturnSet<bool>(false);
                 }
 
                 var user = new Users
                 {
                     IsConfirmed = true,
-                    Password = hashString(password),
+                    Password = HashString(password),
                     Username = username,
                     DisplayName = displayName
                 };
@@ -46,7 +58,7 @@ namespace indiedevlog.web.Managers
                 eFactory.SaveChanges();
             }
 
-            return true;
+            return new ReturnSet<bool>(true);
         }
     }
 }

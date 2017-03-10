@@ -35,12 +35,12 @@ namespace indiedevlog.web.Controllers
         {
             var userMatch = new AccountManager(_globalSettings).AttemptLogin(model.Username, model.Password);
 
-            if (userMatch != null)
+            if (!userMatch.HasError)
             {
                 var claims = new List<Claim>
                     {
                         new Claim("username", model.Username),
-                        new Claim("userid", userMatch.ID.ToString())
+                        new Claim("userid", userMatch.ObjectValue.UserID.ToString())
                     };
 
                 var id = new ClaimsIdentity(claims, "password");
@@ -51,7 +51,7 @@ namespace indiedevlog.web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            model.ErrorMessage = "Incorrect username or password";
+            model.ErrorMessage = userMatch.ErrorException;
 
             return View("Index", model);            
         }
@@ -69,7 +69,7 @@ namespace indiedevlog.web.Controllers
             var registrationResponse = new AccountManager(_globalSettings).AttemptRegister(model.Username,
                 model.Password, model.DisplayName);
 
-            if (registrationResponse)
+            if (!registrationResponse.HasError)
             {
                 return RedirectToAction("Index", "Home");
             }

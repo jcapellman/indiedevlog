@@ -15,7 +15,7 @@ namespace indiedevlog.web.Managers
             GlobalSettings = globalSettings;
         }
 
-        protected string hashString(string input)
+        protected string HashString(string input)
         {
             using (var algorithm = SHA512.Create())
             {
