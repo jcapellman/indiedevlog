@@ -25,6 +25,13 @@ namespace indiedevlog.web.Controllers
             return View(model);
         }
 
+        [Route("/Project/{projectName}")]
+        public ActionResult Index(string projectName)
+        {
+
+            return View("ProjectPlanListing", model);
+        }
+
         [Authorize]
         public ActionResult CreatePlanUpdate(CreatePlanUpdateModel model)
         {
