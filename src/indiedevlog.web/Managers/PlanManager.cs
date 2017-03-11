@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
+using indiedevlog.web.Common;
 using indiedevlog.web.EFModel;
 using indiedevlog.web.EFModel.Objects.SPs;
 using indiedevlog.web.EFModel.Objects.Tables;
+using indiedevlog.web.Models;
 using indiedevlog.web.Objects.PlanUpdates;
 using indiedevlog.web.Settings;
 
@@ -52,6 +53,33 @@ namespace indiedevlog.web.Managers
                 eFactory.SaveChanges();
 
                 return true;
+            }
+        }
+
+        public ReturnSet<ProjectPlanListingModel> GetProjectPlans(string projectName)
+        {
+            using (var eFactory = new EntityFactory(GlobalSettings.DatabaseConnection))
+            {
+                var result =
+                    eFactory.Set<getLatestPlanUpdatesSP>()
+                        .FromSql($"dbo.getLatestPlanUpdatesSP @RowCount = {9}")
+                        .ToList()
+                        .Select(a => new PlanUpdateModel
+                        {
+                            Subject = a.Subject,
+                            Body = a.Body,
+                            Author = a.DisplayName,
+                            ProjectName = a.ProjectName,
+                            TimeStamp = a.Created
+                        }).ToList();
+
+                var model = new ProjectPlanListingModel
+                {
+                    PlanUpdates = result,
+                    ProjectName = projectName
+                };
+
+                return new ReturnSet<ProjectPlanListingModel>(model);
             }
         }
     }
