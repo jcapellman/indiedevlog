@@ -28,6 +28,7 @@ namespace indiedevlog.web.Controllers
         [Route("/Project/{projectName}")]
         public ActionResult Index(string projectName)
         {
+            var model = new PlanManager(_globalSettings).GetLatestPlanUpdates(9);
 
             return View("ProjectPlanListing", model);
         }
