@@ -6,3 +6,4 @@ typings/
 *.lock.json
 /Properties/PublishProfiles
 /src/indiedevlog.web/appsettings.json
+/src/indiedevlog.web/Properties/PublishProfiles
