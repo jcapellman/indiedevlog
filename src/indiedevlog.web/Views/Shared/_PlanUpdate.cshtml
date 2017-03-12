@@ -9,7 +9,7 @@
     <div class="content">
         <p>@Html.Raw(Model.Body)</p>
         <div class="footer">
-            <span class="user">@Model.AuthorName</span>
+            <span class="user"><a href="/users/@Model.AuthorURLSafe">@Model.AuthorName</a></span>
             <span class="date">@Model.PostDate.ToString("MM-dd-yyyy")</span>
         </div>
     </div>
