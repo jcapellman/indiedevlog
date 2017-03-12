@@ -21,6 +21,8 @@ namespace indiedevlog.web.Objects.PlanUpdates
 
         public DateTime PostDate { get; set; }
 
-        public string ProjectNameURLSafe { get; set; }
+        public string ProjectNameURLSafe => ProjectName.Replace(" ", "-");
+
+        public string AuthorURLSafe => AuthorName.Replace(" ", "-");
     }
 }

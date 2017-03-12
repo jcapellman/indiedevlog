@@ -37,7 +37,7 @@ namespace indiedevlog.web.Controllers
 
             return View("ProjectPlanListing", result.ObjectValue);
         }
-
+        
         [Authorize]
         public ActionResult CreatePlanUpdate(CreatePlanUpdateModel model)
         {

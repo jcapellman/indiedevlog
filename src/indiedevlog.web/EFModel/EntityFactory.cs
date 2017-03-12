@@ -21,6 +21,10 @@ namespace indiedevlog.web.EFModel
 
         public DbSet<getLatestPlanUpdatesSP> getLatestPlanUpdatesSP { get; set; }
 
+        public DbSet<getLatestPlanUpdatesForProjectSP> GetLatestPlanUpdatesForProjectsSP { get; set; }
+
+        public DbSet<getLatestPlanUpdatesForUserSP> GetLatestPlanUpdatesForUsersSP { get; set; }
+
         public DbSet<getUserProjectsSP> getUserProjectsSP { get; set; }
 
         private readonly string _connectionString;

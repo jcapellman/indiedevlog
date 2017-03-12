@@ -32,8 +32,7 @@ namespace indiedevlog.web.Managers
                             Subject = a.Subject,
                             AuthorName = a.DisplayName,
                             PostDate = a.Created,
-                            ProjectName = a.ProjectName,
-                            ProjectNameURLSafe = a.ProjectNameURLSafe
+                            ProjectName = a.ProjectName
                         }).ToList();
             }
         }
@@ -62,7 +61,7 @@ namespace indiedevlog.web.Managers
             using (var eFactory = new EntityFactory(GlobalSettings.DatabaseConnection))
             {
                 var result =
-                    eFactory.Set<getLatestPlanUpdatesSP>()
+                    eFactory.Set<getLatestPlanUpdatesForProjectSP>()
                         .FromSql($"dbo.getLatestPlanUpdatesForProjectSP @ProjectName = '{projectName}', @RowCount = {9}")
                         .ToList()
                         .Select(a => new PlanUpdateResponseItem
@@ -71,8 +70,7 @@ namespace indiedevlog.web.Managers
                             Body = a.Body,
                             AuthorName = a.DisplayName,
                             ProjectName = a.ProjectName,
-                            PostDate = a.Created,
-                            ProjectNameURLSafe = a.ProjectNameURLSafe
+                            PostDate = a.Created
                         }).ToList();
 
                 var model = new ProjectPlanListingModel
@@ -82,6 +80,33 @@ namespace indiedevlog.web.Managers
                 };
 
                 return new ReturnSet<ProjectPlanListingModel>(model);
+            }
+        }
+
+        public ReturnSet<UserPlanListingModel> GetUserPlans(string userDisplayName)
+        {
+            using (var eFactory = new EntityFactory(GlobalSettings.DatabaseConnection))
+            {
+                var result =
+                    eFactory.Set<getLatestPlanUpdatesForUserSP>()
+                        .FromSql($"dbo.getLatestPlanUpdatesForUsertSP @UserDisplayName = '{userDisplayName}', @RowCount = {9}")
+                        .ToList()
+                        .Select(a => new PlanUpdateResponseItem
+                        {
+                            Subject = a.Subject,
+                            Body = a.Body,
+                            AuthorName = a.DisplayName,
+                            ProjectName = a.ProjectName,
+                            PostDate = a.Created
+                        }).ToList();
+
+                var model = new UserPlanListingModel()
+                {
+                    PlanUpdates = result,
+                    UserDisplayName = userDisplayName
+                };
+
+                return new ReturnSet<UserPlanListingModel>(model);
             }
         }
     }

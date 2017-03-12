@@ -22,8 +22,7 @@ namespace indiedevlog.web.Managers
             {
                 var project = new Projects
                 {
-                    Name = projectName,
-                    URLSafe = projectName.Replace(" ", "-")
+                    Name = projectName
                 };
 
                 dbFactory.Projects.Add(project);

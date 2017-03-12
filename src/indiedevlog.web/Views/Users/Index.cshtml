@@ -1,0 +1,14 @@
+﻿@model indiedevlog.web.Models.UserPlanListingModel
+
+@{
+    ViewData["Title"] = $"{Model.UserDisplayName}";
+}
+
+<h1>latest updates for @Model.us</h1>
+
+@foreach (var post in @Model.PlanUpdates)
+{
+    @Html.Partial("_PlanUpdate", post)
+
+    <br />
+}
