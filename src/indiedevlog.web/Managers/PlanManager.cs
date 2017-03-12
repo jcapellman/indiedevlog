@@ -63,7 +63,7 @@ namespace indiedevlog.web.Managers
             {
                 var result =
                     eFactory.Set<getLatestPlanUpdatesSP>()
-                        .FromSql($"dbo.getLatestPlanUpdatesForProjectSP @ProjectName = {projectName} AND @RowCount = {9}")
+                        .FromSql($"dbo.getLatestPlanUpdatesForProjectSP @ProjectName = '{projectName}', @RowCount = {9}")
                         .ToList()
                         .Select(a => new PlanUpdateResponseItem
                         {

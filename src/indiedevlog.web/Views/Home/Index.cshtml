@@ -8,20 +8,7 @@
 
 @foreach (var post in @Model)
 {
-    <div class="postContainer">
-        <div class="header">
-            <h3>@post.Subject</h3>
-            <h4>@post.ProjectName</h4>
-        </div>
-
-        <div class="content">
-            <p>@Html.Raw(post.Body)</p>
-            <div class="footer">
-                <span class="user">@post.AuthorName</span>
-                <span class="date">@post.PostDate.ToString("MM-dd-yyyy")</span>
-            </div>
-        </div>
-    </div>
+   @Html.Partial("_PlanUpdate", post)
 
     <br/>
 }

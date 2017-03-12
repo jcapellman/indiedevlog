@@ -1,0 +1,16 @@
+﻿@model indiedevlog.web.Objects.PlanUpdates.PlanUpdateResponseItem
+
+<div class="postContainer">
+    <div class="header">
+        <h3>@Model.Subject</h3>
+        <h4>@Model.ProjectName</h4>
+    </div>
+
+    <div class="content">
+        <p>@Html.Raw(Model.Body)</p>
+        <div class="footer">
+            <span class="user">@Model.AuthorName</span>
+            <span class="date">@Model.PostDate.ToString("MM-dd-yyyy")</span>
+        </div>
+    </div>
+</div>

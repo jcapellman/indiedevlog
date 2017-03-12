@@ -25,7 +25,7 @@ namespace indiedevlog.web.Controllers
             return View(model);
         }
 
-        [Route("/Project/{projectName}")]
+        [Route("/project/{projectName}")]
         public ActionResult Index(string projectName)
         {
             var result = new PlanManager(_globalSettings).GetProjectPlans(projectName);
