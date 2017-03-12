@@ -32,7 +32,8 @@ namespace indiedevlog.web.Managers
                             Subject = a.Subject,
                             AuthorName = a.DisplayName,
                             PostDate = a.Created,
-                            ProjectName = a.ProjectName
+                            ProjectName = a.ProjectName,
+                            ProjectNameURLSafe = a.ProjectNameURLSafe
                         }).ToList();
             }
         }
@@ -62,15 +63,16 @@ namespace indiedevlog.web.Managers
             {
                 var result =
                     eFactory.Set<getLatestPlanUpdatesSP>()
-                        .FromSql($"dbo.getLatestPlanUpdatesSP @RowCount = {9}")
+                        .FromSql($"dbo.getLatestPlanUpdatesForProjectSP @ProjectName = {projectName} AND @RowCount = {9}")
                         .ToList()
-                        .Select(a => new PlanUpdateModel
+                        .Select(a => new PlanUpdateResponseItem
                         {
                             Subject = a.Subject,
                             Body = a.Body,
-                            Author = a.DisplayName,
+                            AuthorName = a.DisplayName,
                             ProjectName = a.ProjectName,
-                            TimeStamp = a.Created
+                            PostDate = a.Created,
+                            ProjectNameURLSafe = a.ProjectNameURLSafe
                         }).ToList();
 
                 var model = new ProjectPlanListingModel

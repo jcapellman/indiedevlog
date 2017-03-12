@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace indiedevlog.web.EFModel.Objects.SPs
 {
-    public class getLatestPlanUpdatesSP
+    public class getLatestPlanUpdatesForProjectSP
     {
         [Key]
         public int ID { get; set; }

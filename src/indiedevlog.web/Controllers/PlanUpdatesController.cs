@@ -28,9 +28,14 @@ namespace indiedevlog.web.Controllers
         [Route("/Project/{projectName}")]
         public ActionResult Index(string projectName)
         {
-            var model = new PlanManager(_globalSettings).GetProjectPlans(projectName);
+            var result = new PlanManager(_globalSettings).GetProjectPlans(projectName);
 
-            return View("ProjectPlanListing", model);
+            if (result.HasError)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            return View("ProjectPlanListing", result.ObjectValue);
         }
 
         [Authorize]

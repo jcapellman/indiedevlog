@@ -20,5 +20,7 @@ namespace indiedevlog.web.Objects.PlanUpdates
         public string AuthorName { get; set; }
 
         public DateTime PostDate { get; set; }
+
+        public string ProjectNameURLSafe { get; set; }
     }
 }
