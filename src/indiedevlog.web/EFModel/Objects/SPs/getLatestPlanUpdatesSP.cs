@@ -17,7 +17,5 @@ namespace indiedevlog.web.EFModel.Objects.SPs
         public string DisplayName { get; set; }
 
         public string ProjectName { get; set; }
-
-        public string ProjectNameURLSafe { get; set; }
     }
 }
