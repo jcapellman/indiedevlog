@@ -26,5 +26,7 @@ namespace indiedevlog.web.Managers
                 return Convert.ToBase64String(hashbytes);
             }
         }
+
+        protected string DeserializeString(string str) => str.Replace("-", " ");
     }
 }

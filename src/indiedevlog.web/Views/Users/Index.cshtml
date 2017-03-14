@@ -4,7 +4,7 @@
     ViewData["Title"] = $"{Model.UserDisplayName}";
 }
 
-<h1>latest updates for @Model.us</h1>
+<h1>latest updates for @Model.UserDisplayName</h1>
 
 @foreach (var post in @Model.PlanUpdates)
 {

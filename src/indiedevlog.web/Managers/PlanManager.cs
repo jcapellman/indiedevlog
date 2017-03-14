@@ -62,7 +62,7 @@ namespace indiedevlog.web.Managers
             {
                 var result =
                     eFactory.Set<getLatestPlanUpdatesForProjectSP>()
-                        .FromSql($"dbo.getLatestPlanUpdatesForProjectSP @ProjectName = '{projectName}', @RowCount = {9}")
+                        .FromSql($"dbo.getLatestPlanUpdatesForProjectSP @ProjectName = '{DeserializeString(projectName)}', @RowCount = {9}")
                         .ToList()
                         .Select(a => new PlanUpdateResponseItem
                         {
@@ -76,7 +76,7 @@ namespace indiedevlog.web.Managers
                 var model = new ProjectPlanListingModel
                 {
                     PlanUpdates = result,
-                    ProjectName = projectName
+                    ProjectName = DeserializeString(projectName)
                 };
 
                 return new ReturnSet<ProjectPlanListingModel>(model);
@@ -89,7 +89,7 @@ namespace indiedevlog.web.Managers
             {
                 var result =
                     eFactory.Set<getLatestPlanUpdatesForUserSP>()
-                        .FromSql($"dbo.getLatestPlanUpdatesForUsertSP @UserDisplayName = '{userDisplayName}', @RowCount = {9}")
+                        .FromSql($"dbo.getLatestPlanUpdatesForUsersSP @UserDisplayName = '{DeserializeString(userDisplayName)}', @RowCount = {9}")
                         .ToList()
                         .Select(a => new PlanUpdateResponseItem
                         {
@@ -103,7 +103,7 @@ namespace indiedevlog.web.Managers
                 var model = new UserPlanListingModel()
                 {
                     PlanUpdates = result,
-                    UserDisplayName = userDisplayName
+                    UserDisplayName = DeserializeString(userDisplayName)
                 };
 
                 return new ReturnSet<UserPlanListingModel>(model);

@@ -12,6 +12,7 @@ namespace indiedevlog.web.Controllers
         {
         }
 
+        [Route("/users/{userDisplayName}")]
         public ActionResult Index(string userDisplayName)
         {
             var result = new PlanManager(_globalSettings).GetUserPlans(userDisplayName);
