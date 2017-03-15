@@ -24,7 +24,7 @@ namespace indiedevlog.web.Controllers
 
                 var userClaim = claims.FirstOrDefault(a => a.Type == "userid");
 
-                return Convert.ToInt32(userClaim.Value);
+                return userClaim == null ? default(int) : Convert.ToInt32(userClaim.Value);
             }
         }
     }

@@ -15,5 +15,7 @@ namespace indiedevlog.web.Controllers
         {
             return View(new PlanManager(_globalSettings).GetLatestPlanUpdates(_globalSettings.NumPostsToList));
         }
+
+        public ActionResult Error(string exceptionStr) => View("Error", exceptionStr);
     }
 }

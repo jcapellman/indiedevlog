@@ -32,7 +32,7 @@ namespace indiedevlog.web.Controllers
 
             if (result.HasError)
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Error", "Home", result.ErrorException);
             }
 
             return View("ProjectPlanListing", result.ObjectValue);
