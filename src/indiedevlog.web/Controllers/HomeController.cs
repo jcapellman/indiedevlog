@@ -13,7 +13,7 @@ namespace indiedevlog.web.Controllers
         [ResponseCache(NoStore = false, Duration = 3600)]
         public IActionResult Index()
         {
-            return View(new PlanManager(_globalSettings).GetLatestPlanUpdates(_globalSettings.NumPostsToList));
+            return View(new PlanManager(_globalSettings).GetLatestPlanUpdates());
         }
 
         public ActionResult Error(string exceptionStr) => View("Error", exceptionStr);
