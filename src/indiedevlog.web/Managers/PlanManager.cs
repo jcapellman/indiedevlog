@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using indiedevlog.web.Common;
 using indiedevlog.web.EFModel;
 using indiedevlog.web.EFModel.Objects.SPs;
@@ -18,13 +19,13 @@ namespace indiedevlog.web.Managers
         {
         }
 
-        public List<PlanUpdateResponseItem> GetLatestPlanUpdates(int count)
+        public List<PlanUpdateResponseItem> GetLatestPlanUpdates()
         {
             using (var dbFactory = new EntityFactory(GlobalSettings.DatabaseConnection))
             {
                 return
                     dbFactory.Set<getLatestPlanUpdatesSP>()
-                        .FromSql($"dbo.getLatestPlanUpdatesSP @RowCount = {count}")
+                        .FromSql($"dbo.getLatestPlanUpdatesSP @RowCount = {GlobalSettings.NumPostsToList}")
                         .ToList()
                         .Select(a => new PlanUpdateResponseItem
                         {
@@ -62,7 +63,7 @@ namespace indiedevlog.web.Managers
             {
                 var result =
                     eFactory.Set<getLatestPlanUpdatesForProjectSP>()
-                        .FromSql($"dbo.getLatestPlanUpdatesForProjectSP @ProjectName = '{DeserializeString(projectName)}', @RowCount = {9}")
+                        .FromSql($"dbo.getLatestPlanUpdatesForProjectSP @ProjectName = '{DeserializeString(projectName)}', @RowCount = {GlobalSettings.NumPostsToList}")
                         .ToList()
                         .Select(a => new PlanUpdateResponseItem
                         {
@@ -89,7 +90,7 @@ namespace indiedevlog.web.Managers
             {
                 var result =
                     eFactory.Set<getLatestPlanUpdatesForUserSP>()
-                        .FromSql($"dbo.getLatestPlanUpdatesForUsersSP @UserDisplayName = '{DeserializeString(userDisplayName)}', @RowCount = {9}")
+                        .FromSql($"dbo.getLatestPlanUpdatesForUsersSP @UserDisplayName = '{DeserializeString(userDisplayName)}', @RowCount = {GlobalSettings.NumPostsToList}")
                         .ToList()
                         .Select(a => new PlanUpdateResponseItem
                         {
