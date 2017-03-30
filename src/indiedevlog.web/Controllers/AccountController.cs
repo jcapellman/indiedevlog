@@ -35,7 +35,7 @@ namespace indiedevlog.web.Controllers
         {
             var userMatch = new AccountManager(_globalSettings).AttemptLogin(model.Username, model.Password);
 
-            if (!userMatch.HasError)
+            if (!userMatch.HasError && userMatch.ObjectValue != null)
             {
                 var claims = new List<Claim>
                     {
