@@ -10,7 +10,7 @@ namespace indiedevlog.web.Controllers
     {
         public HomeController(IOptions<GlobalSettings> globalSettings) : base(globalSettings.Value) { }
         
-        [ResponseCache(NoStore = false, Duration = 3600)]
+        [ResponseCache(CacheProfileName = "Default")]
         public IActionResult Index()
         {
             return View(new PlanManager(_globalSettings).GetLatestPlanUpdates());

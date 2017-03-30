@@ -1,8 +1,10 @@
-﻿using indiedevlog.web.Settings;
+﻿using System;
+using indiedevlog.web.Settings;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -24,6 +26,21 @@ namespace indiedevlog.web
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc(options =>
+            {
+                options.CacheProfiles.Add("Default",
+                    new CacheProfile()
+                    {
+                        Duration = Convert.ToInt32(Configuration.GetSection("GlobalSettings")["CacheLengthInSeconds"])
+                    });
+                options.CacheProfiles.Add("Never",
+                    new CacheProfile()
+                    {
+                        Location = ResponseCacheLocation.None,
+                        NoStore = true
+                    });
+            });
+
             services.Configure<GlobalSettings>(Configuration.GetSection("GlobalSettings"));
             services.AddMvc();
         }

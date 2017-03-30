@@ -7,5 +7,7 @@
         public int NumPostsToList { get; set; }
 
         public string DatabaseConnection { get; set; }
+
+        public int CacheLengthInSeconds { get; set; }
     }
 }
