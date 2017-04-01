@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace indiedevlog.web.Controllers
 {
+    [ResponseCache(CacheProfileName = "Never")]
     public class AccountController : BaseController
     {
         public AccountController(IOptions<GlobalSettings> globalSettings) : base(globalSettings.Value)
